@@ -15,6 +15,13 @@ const client = generateClient<Schema>();
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [commands, setCommands] = useState<Array<Schema["Command"]["type"]>>([])
+
+  function listCommands() {
+    client?.models?.Command?.observeQuery()?.subscribe({
+      next: (data) => setCommands([...data.items])
+    })
+  }
 
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
@@ -24,6 +31,7 @@ export default function App() {
 
   useEffect(() => {
     listTodos();
+    listCommands();
   }, []);
 
   function createTodo() {
@@ -49,6 +57,12 @@ export default function App() {
           <li onClick={() => deleteTodo(todo.id)} key={todo.id}>
             {todo.content}
           </li>
+        ))}
+      </ul>
+
+      <ul>
+        {commands.map(command => (
+          <li>{command.action}</li>
         ))}
       </ul>
       <div>
