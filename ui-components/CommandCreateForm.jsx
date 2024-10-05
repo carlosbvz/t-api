@@ -5,7 +5,7 @@ import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createCommand } from "./graphql/mutations";
-const client = generateClient();
+const client = generateClient({ authMode: "identityPool" });
 export default function CommandCreateForm(props) {
   const {
     clearOnSuccess = true,
@@ -57,6 +57,7 @@ export default function CommandCreateForm(props) {
       columnGap="15px"
       padding="20px"
       onSubmit={async (event) => {
+        debugger
         event.preventDefault();
         let modelFields = {
           action,
