@@ -24,7 +24,11 @@ export default function Commands() {
         const sortedCommands = [...data?.items].sort(
           (a, b) =>
             new Date(b.updatedAt).valueOf() - new Date(a.updatedAt).valueOf()
-        );
+        ).map( (item:any) => {
+          delete item?.type
+          return item
+        })
+        
         setCommands(sortedCommands);
         setIsLoading(false);
       },
