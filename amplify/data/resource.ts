@@ -5,8 +5,11 @@ const schema = a.schema({
     .model({
       id: a.id().required(),
       action: a.string().required(),
-      value: a.integer().required()
+      value: a.integer().required(),
+      createdAt: a.datetime(),
+      type: a.string().default('command')
     })
+    .secondaryIndexes( (index) => [index('type').sortKeys(['createdAt'])])
     .authorization((allow) => [allow.guest()]),
 });
 

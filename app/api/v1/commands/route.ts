@@ -14,10 +14,18 @@ export async function GET(request: NextRequest) {
     const limitParam = Number(searchParams.get("limit")) || 50;
     const nextTokenParam = searchParams.get("nextToken");
 
-    const { data, errors, nextToken } = await client.models.Command.list({
-      limit: limitParam,
-      nextToken: nextTokenParam,
-    });
+    const { data, errors, nextToken } =
+      await client.models.Command.listCommandByTypeAndCreatedAt(
+        {
+          type: "command",
+        },
+        {
+          limit: limitParam,
+          nextToken: nextTokenParam,
+          sortDirection: "ASC",
+        }
+      );
+
     if (errors) throw errors;
 
     const commands = data;
@@ -32,17 +40,16 @@ export async function GET(request: NextRequest) {
 export async function POST(request: Request) {
   try {
     const command = await request.json();
-    const {action, value} = command;
-    const {data, errors} = await client?.models?.Command?.create({
+    const { action, value } = command;
+    const { data, errors } = await client?.models?.Command?.create({
       value,
-      action
-    })
+      action,
+    });
     if (errors) throw errors;
     return NextResponse.json({ data });
   } catch (e) {
     return NextResponse.json({ error: "Cannot create action" });
   }
-
 }
 
 export async function DELETE(request: NextRequest) {
@@ -50,11 +57,11 @@ export async function DELETE(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const id = searchParams.get("id");
     if (id) {
-      const {data, errors} = await client.models.Command.delete({
+      const { data, errors } = await client.models.Command.delete({
         id,
       });
-      
-      if (errors) throw errors
+
+      if (errors) throw errors;
     } else {
       throw new Error("Cannot performe delete operation. Please provide an id");
     }
