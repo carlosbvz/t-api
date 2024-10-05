@@ -31,13 +31,18 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
-    const command = data.command;
-    // commands.push(command)
+    const command = await request.json();
+    const {action, value} = command;
+    const {data, errors} = await client?.models?.Command?.create({
+      value,
+      action
+    })
+    if (errors) throw errors;
+    return NextResponse.json({ data });
   } catch (e) {
-    /* you error message */
+    return NextResponse.json({ error: "Cannot create action" });
   }
-  return NextResponse.json({ foo: "boo" });
+
 }
 
 export async function DELETE(request: NextRequest) {
