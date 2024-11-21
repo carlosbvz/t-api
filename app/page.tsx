@@ -3,7 +3,7 @@ import type { Schema } from "@/amplify/data/resource";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
-import { Authenticator } from "@aws-amplify/ui-react";
+// import { Authenticator } from "@aws-amplify/ui-react";
 import type { Metadata } from "next";
 import Commands from "@/components/commands/Commands";
 

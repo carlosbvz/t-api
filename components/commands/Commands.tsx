@@ -21,15 +21,17 @@ export default function Commands() {
   function listCommands() {
     client?.models?.Command?.observeQuery()?.subscribe({
       next: (data) => {
-        const sortedCommands = [...data?.items].sort(
-          (a, b) =>
-            new Date(b.updatedAt).valueOf() - new Date(a.updatedAt).valueOf()
-        ).map( (item:any) => {
-          delete item?.type
-          return item
-        })
-        
-        setCommands(sortedCommands);
+        if (data?.items) {
+          const sortedCommands = [...data.items].sort(
+            (a, b) =>
+              new Date(b.updatedAt).valueOf() - new Date(a.updatedAt).valueOf()
+          ).map((item: any) => {
+            delete item?.type;
+            return item;
+          });
+
+          setCommands(sortedCommands);
+        }
         setIsLoading(false);
       },
     });
@@ -58,7 +60,7 @@ export default function Commands() {
         <Loader />
       ) : (
         commands.map((command) => (
-          <Grid  templateColumns="1fr 1fr">
+          <Grid key={command.id} templateColumns="1fr 1fr">
             <pre>{JSON.stringify(command, null, 2)}</pre>
             <div>
             <Button isFullWidth={false} onClick={() => deleteCommand(command.id)}>Delete</Button>

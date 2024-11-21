@@ -41,10 +41,16 @@ export async function POST(request: Request) {
   try {
     const command = await request.json();
     const { action, value } = command;
-    const { data, errors } = await client?.models?.Command?.create({
+
+    if (!client || !client.models || !client.models.Command) {
+      throw new Error("Client or Command model is not defined");
+    }
+
+    const { data, errors } = await client.models.Command.create({
       value,
       action,
     });
+
     if (errors) throw errors;
     return NextResponse.json({ data });
   } catch (e) {
@@ -57,7 +63,7 @@ export async function DELETE(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const id = searchParams.get("id");
     if (id) {
-      const { data, errors } = await client.models.Command.delete({
+      const { errors } = await client.models.Command.delete({
         id,
       });
 
