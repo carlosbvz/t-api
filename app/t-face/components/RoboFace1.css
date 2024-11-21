@@ -15,9 +15,9 @@
 .robot-eyebrows {
     display: flex;
     justify-content: space-between;
-    width: 40%; /* Align width with eye spacing */
+    width: 40%;
     position: relative;
-    margin-bottom: 4%; /* Distance between eyebrows and eyes */
+    margin-bottom: 3%; /* Reduced spacing */
 }
 
 /* Individual eyebrows */
@@ -25,11 +25,10 @@
     width: 130px;
     height: 15px;
     background: #778adb;
-    border-radius: 50px; /* Rounded edges for a smooth curve */
-    transform: translateY(
-        -20px
-    ); /* Lift eyebrows to align naturally with the eyes */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for a soft look */
+    border-radius: 20px; /* Smoother curve */
+    transform: translateY(-10px); /* Lowered slightly */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: transform 0.5s ease-in-out;
 }
 
 /* Container for the eyes */
@@ -37,14 +36,14 @@
     display: flex;
     justify-content: space-between;
     width: 40%;
-    margin-bottom: 5%;
+    margin-bottom: 6%; /* More spacing between eyes and mouth */
 }
 
 /* Individual eyes */
 .eye {
     width: 120px;
     height: 140px;
-    background: #000; /* Solid black for the eye base */
+    background: #000;
     border-radius: 50%;
     position: relative;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -54,23 +53,75 @@
 .eye-highlight {
     width: 40px;
     height: 40px;
-    background: #fff; /* Bright white for highlight */
+    background: #fff;
     border-radius: 50%;
     position: absolute;
     top: 20%;
-    left: 20%;
+
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.eye-highlight::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    position: absolute;
+    top: 60%;
+}
+
+.eye-left .eye-highlight {
+    right: 20%;
+}
+
+.eye-left .eye-highlight::after {
+    left: 60%;
+}
+
+.eye-right .eye-highlight {
+    left: 20%;
+}
+
+.eye-right .eye-highlight::after {
+    right: 60%;
 }
 
 /* Robot's bigger curved smile (mouth) */
 .robot-mouth {
-    width: 100px; /* Increased width for a bigger smile */
-    height: 50px; /* Adjusted height for a smooth curve */
+    width: 120px;
+    height: 60px;
     border: 4px solid transparent;
-    border-bottom: 10px solid #000; /* Use the bottom border for the smile */
+    border-bottom: 20px solid #000;
     border-radius: 50%;
-    margin-top: 15px;
-    transform: translateY(
-        -5px
-    ); /* Slightly lift the mouth for better positioning */
+    margin-top: 20px;
+    transform: translateY(-5px);
+}
+
+/* Animation for the sad face */
+/* Animation keyframes for the sad expression */
+@keyframes eyebrows-sad {
+    0% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(10px) rotate(10deg); /* Drooping inward and downward */
+    }
+}
+
+@keyframes eyes-sad {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.9); /* Slight squint effect */
+    }
+}
+
+@keyframes mouth-sad {
+    0% {
+        transform: translateY(-5px) scaleX(1) rotate(0deg);
+    }
+    100% {
+        transform: translateY(10px) scaleX(1.2) rotate(180deg); /* Frown curve */
+    }
 }

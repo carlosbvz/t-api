@@ -1,0 +1,28 @@
+/* Base styles (neutral face) */
+.eyebrow {
+    transform: translateY(-10px); /* Neutral position */
+    transition: transform 0.5s ease-in-out; /* Smooth animation */
+}
+
+.eye {
+    transform: scale(1); /* Neutral eye size */
+    transition: transform 0.5s ease-in-out; /* Smooth animation */
+}
+
+.robot-mouth {
+    transform: translateY(-5px) scaleX(1) rotate(0deg); /* Neutral smile */
+    transition: transform 0.5s ease-in-out; /* Smooth animation */
+}
+
+/* Sad face styles when class is applied */
+.robot-animation-sad .eyebrow {
+    transform: translateY(10px) rotate(10deg); /* Drooping inward and downward */
+}
+
+.robot-animation-sad .eye {
+    transform: scale(0.9); /* Slight squint effect */
+}
+
+.robot-animation-sad .robot-mouth {
+    transform: translateY(10px) scaleX(1.2) rotate(180deg); /* Frown curve */
+}
