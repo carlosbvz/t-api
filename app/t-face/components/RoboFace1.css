@@ -22,7 +22,8 @@
 
 /* Individual eyebrows */
 .eyebrow {
-    width: 130px;
+    width: 20%;
+    min-width: 70px;
     height: 15px;
     background: #778adb;
     border-radius: 20px; /* Smoother curve */
@@ -88,40 +89,13 @@
 
 /* Robot's bigger curved smile (mouth) */
 .robot-mouth {
-    width: 120px;
+    width: 10%;
+    min-width: 120px;
     height: 60px;
     border: 4px solid transparent;
+    border-top: none;
     border-bottom: 20px solid #000;
     border-radius: 50%;
     margin-top: 20px;
     transform: translateY(-5px);
-}
-
-/* Animation for the sad face */
-/* Animation keyframes for the sad expression */
-@keyframes eyebrows-sad {
-    0% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(10px) rotate(10deg); /* Drooping inward and downward */
-    }
-}
-
-@keyframes eyes-sad {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(0.9); /* Slight squint effect */
-    }
-}
-
-@keyframes mouth-sad {
-    0% {
-        transform: translateY(-5px) scaleX(1) rotate(0deg);
-    }
-    100% {
-        transform: translateY(10px) scaleX(1.2) rotate(180deg); /* Frown curve */
-    }
 }
