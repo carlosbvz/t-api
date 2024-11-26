@@ -1,11 +1,4 @@
-type FaceGesture =
-    | 'blink_left'
-    | 'blink_right'
-    | 'smile'
-    | 'frown'
-    | 'look-left'
-    | 'look-right'
-    | 'look-up'
-    | 'look-down'
+type Animation = 'robot-animation-sad' | ''
+type Action = 'ROBOT-ANIMATION_SAD' | 'ROBOT-ANIMATION_SMILE' | ''
 
-export type { FaceGesture }
+export type { Animation, Action }

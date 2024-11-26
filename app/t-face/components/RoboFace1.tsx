@@ -1,36 +1,19 @@
 import type { Schema } from '@/amplify/data/resource'
-import { useEffect, useState } from 'react'
+import type { Animation } from '@/types/common'
 import './RoboFace1.css'
 import './RoboFaceSad.css'
 
 type Props = {
-    command: Schema['Command']['type'] | null
+    animation: Animation | null
     onCommandComplete: (command: Schema['Command']['type']) => void
 }
 
 export default function RoboFace1({
-    command,
+    animation,
     onCommandComplete,
 }: Readonly<Props>) {
-    const [robotAnimation, setRobotAnimation] = useState('')
-
-    useEffect(() => {
-        if (command) {
-            console.log(command)
-            onCommandComplete(command)
-        }
-    }, [command])
-
-    const handleClick = () => {
-        if (robotAnimation === '') {
-            setRobotAnimation('robot-animation-sad')
-        } else {
-            setRobotAnimation('')
-        }
-    }
-
     return (
-        <div className={`robot-screen ${robotAnimation}`} onClick={handleClick}>
+        <div className={`robot-screen ${animation}`}>
             <div className="robot-eyebrows">
                 <div className="eyebrow"></div>
                 <div className="eyebrow"></div>
